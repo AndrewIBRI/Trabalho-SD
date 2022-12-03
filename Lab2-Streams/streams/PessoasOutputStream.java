@@ -1,5 +1,7 @@
 package streams;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -43,7 +45,40 @@ public class PessoasOutputStream extends OutputStream {
 	}
 
 	public void writeFile() {
-		// envia os dados de um conjunto (array) de Pessoas
+		   
+        FileOutputStream fout = null;
+		try {
+			fout = new FileOutputStream("D:\\testout.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}    
+        for (Pessoa pessoa : pessoas) {
+			if (pessoa != null) {
+				int tamanhoNomePessoa = pessoa.getNome().getBytes().length;
+				String nome = pessoa.getNome();
+				double cpf = pessoa.getCpf();
+				int idade = pessoa.getIdade();
+							
+				String s=" tamanhoNomePessoa: "+tamanhoNomePessoa+ "\n"+
+						" nomePessoa: "+nome+ "\n"+
+						" cpf: "+cpf+ "\n"+
+						" idade: "+idade;    
+		        byte b[]=s.getBytes();//converting string into byte array    
+		        
+		        try {
+					fout.write(b);
+					fout.close();
+					System.out.println("success...");   
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}    
+		        
+			}
+		}
+            
+        System.out.println("success...");    
 	}
 	
 	public void writeTCP() {
