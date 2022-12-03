@@ -23,7 +23,7 @@ public class PessoasInputStream extends InputStream {
 		System.out.println("Informa o nome da pessoa:"); 
 		String nome = sc.nextLine();
 		System.out.println("Informe o cpf da pessoa:"); 
-		double cpf = sc.nextDouble();
+		long cpf = sc.nextLong();
 		System.out.println("Informe a idade do pessoa:"); 
 		int idade = sc.nextInt();
 		

@@ -1,10 +1,15 @@
 package streams;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import entidades.Pessoa;
 
@@ -57,7 +62,7 @@ public class PessoasOutputStream extends OutputStream {
 			if (pessoa != null) {
 				int tamanhoNomePessoa = pessoa.getNome().getBytes().length;
 				String nome = pessoa.getNome();
-				double cpf = pessoa.getCpf();
+				long cpf = pessoa.getCpf();
 				int idade = pessoa.getIdade();
 							
 				String s=" tamanhoNomePessoa: "+tamanhoNomePessoa+ "\n"+
@@ -69,7 +74,7 @@ public class PessoasOutputStream extends OutputStream {
 		        try {
 					fout.write(b);
 					fout.close();
-					System.out.println("success...");   
+					System.out.println("successo");   
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -77,12 +82,48 @@ public class PessoasOutputStream extends OutputStream {
 		        
 			}
 		}
-            
-        System.out.println("success...");    
+                
 	}
 	
-	public void writeTCP() {
-		// envia os dados de um conjunto (array) de Pessoas
+	public void writeTCP() {  
+		Socket socket = null;
+        for (Pessoa pessoa : pessoas) {
+			if (pessoa != null) {
+				int tamanhoNomePessoa = pessoa.getNome().getBytes().length;
+				String nome = pessoa.getNome();
+				long cpf = pessoa.getCpf();
+				int idade = pessoa.getIdade();
+		        try {
+		        	int serverPort = 7896;
+					socket = new Socket("localhost", serverPort);
+					DataInputStream in = new DataInputStream(socket.getInputStream());
+					DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+					String envio = " tamanhoNomePessoa: "+tamanhoNomePessoa+ "\n"+
+							" nomePessoa: "+nome+ "\n"+
+							" cpf: "+cpf+ "\n"+
+							" idade: "+idade;
+					System.out.println("Sent: "+envio);
+					out.writeUTF(envio); // UTF is a string encoding see Sn. 4.4
+					String data = in.readUTF(); // read a line of data from the stream
+					System.out.println("Received: " + data);
+					System.out.println("successo");   
+				} catch (UnknownHostException e) {
+					System.out.println("Socket:" + e.getMessage());
+				} catch (EOFException e) {
+					System.out.println("EOF:" + e.getMessage());
+				} catch (IOException e) {
+					System.out.println("readline:" + e.getMessage());
+				} finally {
+					if (socket != null)
+						try {
+							socket.close();
+						} catch (IOException e) {
+							System.out.println("close:" + e.getMessage());
+						}
+				}  
+		        
+			}
+		}
 	}		
 	
 	@Override

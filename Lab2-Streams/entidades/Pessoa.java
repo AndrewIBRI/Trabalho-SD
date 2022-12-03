@@ -2,10 +2,10 @@ package entidades;
 
 public class Pessoa {
 	private String nome;
-	private double cpf;
+	private long cpf;
 	private int idade;
 	
-	public Pessoa(String nome, double cpf, int idade) {
+	public Pessoa(String nome, long cpf, int idade) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
@@ -17,10 +17,10 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public double getCpf() {
+	public long getCpf() {
 		return cpf;
 	}
-	public void setCpf(double cpf) {
+	public void setCpf(long cpf) {
 		this.cpf = cpf;
 	}
 	public int getIdade() {

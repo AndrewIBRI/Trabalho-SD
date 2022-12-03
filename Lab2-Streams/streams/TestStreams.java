@@ -14,7 +14,8 @@ public class TestStreams {
 		
 		PessoasOutputStream pos = new PessoasOutputStream(pessoas, System.out);
 		//pos.writeSystem();
-		pos.writeFile();
+		//pos.writeFile();
+		pos.writeTCP();
 		pos.close();
 	}
 }
