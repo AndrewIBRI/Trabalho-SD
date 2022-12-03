@@ -5,13 +5,13 @@ import java.net.*;
 import java.util.*;
 
 /*
-* Servidor para processar as requisiï¿½ï¿½es de Ping sobre UDP.
+* Servidor para processar as requisições de Ping sobre UDP.
 */
 public class PingServer {
 	private static final double LOSS_RATE = 0.3;
 	private static final int AVERAGE_DELAY = 100;// milliseconds
 	private static DatagramSocket socket;
-  
+
 	public static void main(String[] args) throws Exception {
 		while (true) {
 			// Obter o argumento da linha de comando.
@@ -20,13 +20,13 @@ public class PingServer {
 				return;
 			}
 			int port = Integer.parseInt(args[0]);
-			// Gerador de nï¿½meros aleatï¿½rios p/ simular perda de pacotes e atrasos na rede.
+			// Gerador de números aleatórios p/ simular perda de pacotes e atrasos na rede.
 			Random random = new Random();
 			socket = new DatagramSocket(port);
 			byte[] buffer = new byte[1024];
 			// Criar um pacote de datagrama para comportar o pacote UDP de chegada.
 			DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-			// Bloquear atï¿½ que o hospedeiro receba o pacote UDP.
+			// Bloquear até que o hospedeiro receba o pacote UDP.
 			socket.receive(request);
 			// Imprimir os dados recebidos.
 			printData(request);
@@ -48,26 +48,26 @@ public class PingServer {
 	}
 
 	/*
-	 * Imprimir o dado de Ping para o trecho de saï¿½da padrï¿½o.
+	 * Imprimir o dado de Ping para o trecho de saída padrão.
 	 */
 	private static void printData(DatagramPacket request) throws Exception {
-		// Obter referï¿½ncias para a ordem de pacotes de bytes.
+		// Obter referências para a ordem de pacotes de bytes.
 		byte[] buf = request.getData();
 		// Envolver os bytes numa cadeia de entrada vetor de bytes, de modo que
-		// vocï¿½ possa ler os dados como uma cadeia de bytes.
+		// você possa ler os dados como uma cadeia de bytes.
 		ByteArrayInputStream bais = new ByteArrayInputStream(buf);
-		// Envolver a cadeia de saï¿½da do vetor bytes num leitor de cadeia de
-		// entrada, de modo que vocï¿½ possa ler os dados como uma cadeia de
+		// Envolver a cadeia de saída do vetor bytes num leitor de cadeia de
+		// entrada, de modo que você possa ler os dados como uma cadeia de
 		// caracteres.
 		InputStreamReader isr = new InputStreamReader(bais);
 		// Envolver o leitor de cadeia de entrada num leitor com armazenagem, de
-		// modo que vocï¿½ possa ler os dados de caracteres linha a linha. (A
-		// linha ï¿½ uma seqï¿½ï¿½ncia de caracteres terminados por alguma combinaï¿½ï¿½o
+		// modo que você possa ler os dados de caracteres linha a linha. (A
+		// linha é uma seqüência de caracteres terminados por alguma combinação
 		// de \r e \n.)
 		BufferedReader br = new BufferedReader(isr);
-		// O dado da mensagem estï¿½ contido numa ï¿½nica linha, entï¿½o leia esta linha.
+		// O dado da mensagem está contido numa única linha, então leia esta linha.
 		String line = br.readLine();
-		// Imprimir o endereï¿½o do hospedeiro e o dado recebido dele.
+		// Imprimir o endereço do hospedeiro e o dado recebido dele.
 		System.out.println("Received from " + request.getAddress().getHostAddress() + ":" + new String(line));
 	}
 }
