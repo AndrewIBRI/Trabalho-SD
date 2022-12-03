@@ -1,13 +1,7 @@
-/PessoaOutputStream.class
-/AddPerson.class
-/ConformanceJavaLite$BinaryDecoder.class
-/ConformanceJavaLite$BinaryDecoderType.class
-/ConformanceJavaLite.class
-/ListPeople.class
-/com/
 /beans/
 /calculadora/
 /cliente/
+/com/
 /examples/
 /google/
 /interfaces/
@@ -16,4 +10,3 @@
 /serialization/
 /servlets/
 /sockets/
-/ping/
