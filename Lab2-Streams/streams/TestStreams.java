@@ -13,8 +13,8 @@ public class TestStreams {
 		pis.close();        
 		
 		PessoasOutputStream pos = new PessoasOutputStream(pessoas, System.out);
-		//pos.writeSystem();
-		//pos.writeFile();
+		pos.writeSystem();
+		pos.writeFile();
 		pos.writeTCP();
 		pos.close();
 	}

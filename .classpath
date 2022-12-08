@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Lab2-Streams"/>
-	<classpathentry kind="src" path="Lab3-Serialization/src"/>
 	<classpathentry kind="src" path="Lab4-SerializationProtocolBuffers/conformance"/>
 	<classpathentry kind="src" path="Lab4-SerializationProtocolBuffers/examples"/>
 	<classpathentry kind="src" path="Lab4-SerializationProtocolBuffers/java/core/src/main/java"/>
