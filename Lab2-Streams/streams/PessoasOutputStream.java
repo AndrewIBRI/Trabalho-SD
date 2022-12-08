@@ -10,13 +10,16 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import entidades.Pessoa;
+import util.Empacotamento;
 
 public class PessoasOutputStream extends OutputStream {
 	
 	private OutputStream op;
 	private Pessoa[] pessoas;
+	private ArrayList<Object> pessoasarray;
 	
 	public PessoasOutputStream() {}
 	
@@ -128,7 +131,42 @@ public class PessoasOutputStream extends OutputStream {
 	
 	@Override
 	public void write(int b) throws IOException {
-		// TODO Auto-generated method stub
+		Socket socket = null;
+		for (Pessoa pessoa : pessoas) {
+			if (pessoa != null) {
+				int tamanhoNomePessoa = pessoa.getNome().getBytes().length;
+				String nome = pessoa.getNome();
+				long cpf = pessoa.getCpf();
+				int idade = pessoa.getIdade();
+		        try {
+		        	int serverPort = 7896;
+					socket = new Socket("localhost", serverPort);
+					DataInputStream in = new DataInputStream(socket.getInputStream());
+					DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+					Empacotamento.gravarArquivoBinario(pessoasarray);
+					System.out.println("Sent: "+envio);
+					out.writeUTF(envio); // UTF is a string encoding see Sn. 4.4
+					String data = in.readUTF(); // read a line of data from the stream
+					System.out.println("Received: " + data);
+					System.out.println("successo");   
+				} catch (UnknownHostException e) {
+					System.out.println("Socket:" + e.getMessage());
+				} catch (EOFException e) {
+					System.out.println("EOF:" + e.getMessage());
+				} catch (IOException e) {
+					System.out.println("readline:" + e.getMessage());
+				} finally {
+					if (socket != null)
+						try {
+							socket.close();
+						} catch (IOException e) {
+							System.out.println("close:" + e.getMessage());
+						}
+				}  
+		        
+			}
+		}
+		
 	}
 
 	@Override

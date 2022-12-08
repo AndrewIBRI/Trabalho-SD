@@ -10,9 +10,9 @@ import java.io.ObjectOutputStream;
 
 public class Empacotamento {
 
-	// serialização: gravando o objetos no arquivo binário "nomeArq"
-	public static void gravarArquivoBinario(ArrayList<Object> lista, String nomeArq) {
-		File arq = new File(nomeArq);
+	// serializaï¿½ï¿½o: gravando o objetos no arquivo binï¿½rio "nomeArq"
+	public static void gravarArquivoBinario(ArrayList<Object> lista) {
+		File arq = new File("dados.dat");
 		try {
 			arq.delete();
 			arq.createNewFile();
