@@ -129,8 +129,7 @@ public class PessoasOutputStream extends OutputStream {
 		}
 	}		
 	
-	@Override
-	public void write(int b) throws IOException {
+	public void write() throws IOException {
 		Socket socket = null;
 		for (Pessoa pessoa : pessoas) {
 			if (pessoa != null) {
