@@ -143,8 +143,12 @@ public class PessoasOutputStream extends OutputStream {
 					DataInputStream in = new DataInputStream(socket.getInputStream());
 					DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 					Empacotamento.gravarArquivoBinario(pessoasarray);
-					//System.out.println("Sent: "+envio);
-					//out.writeUTF(envio); // UTF is a string encoding see Sn. 4.4
+					String envio = " tamanhoNomePessoa: "+tamanhoNomePessoa+ "\n"+
+							" nomePessoa: "+nome+ "\n"+
+							" cpf: "+cpf+ "\n"+
+							" idade: "+idade;
+					System.out.println("Sent: "+envio);
+					out.writeUTF(envio); // UTF is a string encoding see Sn. 4.4
 					String data = in.readUTF(); // read a line of data from the stream
 					System.out.println("Received: " + data);
 					System.out.println("successo");   
