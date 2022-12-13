@@ -12,28 +12,15 @@ acesso = Pyro4.Proxy(uri)
 
 print('CLIENTE 0')
 
-
-print('\n-----------------Exercicio 1--------------------')
+print('\nEnvia mensagem para o servidor')
 #Chamada do metodo
-resultado_arquivo = acesso.Arquivo('arquivo.txt')
-
-#Apresentando resultados
-if (resultado_arquivo == False):
-    print('Arquivo nao encontrado')
-else:
-    print('Arquivo encontrado')
-
-
-
-print('\n-----------------Exercicio 2--------------------')
-#Chamada do metodo
-resultado_broadcast = acesso.Broadcast('Quero enviar esta mensagem para todos os clientes - Cliente 0')
+resultado_broadcast = acesso.Broadcast('Sou Cliente 0')
 print(resultado_broadcast)
 
 
 
-print('\n-----------------Exercicio 3--------------------')
-destino = 'USD'
+print('\nCotacao de moeda')
+moeda = 'USD'
 orcamento = 200
-resultado_agencia = acesso.Agencia(destino,orcamento)
-print(destino,resultado_agencia)
+resultado_agencia = acesso.Agencia(moeda,orcamento)
+print(moeda,resultado_agencia)

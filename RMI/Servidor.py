@@ -8,29 +8,16 @@ import requests
 @Pyro4.expose
 # Criação de uma classe qualquer
 class SD:
-   
-#-----------------------------------Primeiro Exercicio------------
-
-    def Arquivo(self, arquivolido):
-        resultado = os.path.exists(arquivolido)
-        return resultado
-
-
-#-----------------------------------Segundo Exercicio------------
-
+    
     def Broadcast(self, texto):
         return texto
-
-
-
-#-----------------------------------Terceiro Exercicio------------
-
-    def Agencia(self, destino, orcamento):
+    def Agencia(self, moeda, orcamento):
         base_real = 4.43
-        link = requests.get('http://data.fixer.io/api/latest?access_key=ad9f98211c08ae5983b119065722bbcd&symbols=' + destino)
+        #link muito util inclusive caso queira usar em tempo real o valor de qualquer moeda
+        link = requests.get('http://data.fixer.io/api/latest?access_key=ad9f98211c08ae5983b119065722bbcd&symbols=' + moeda)
         if link.status_code == 200:
             dados = json.loads(link.content)
-            taxa = dados['rates'][destino]
+            taxa = dados['rates'][moeda]
             calculo = orcamento/base_real
             resultado = taxa * calculo
             return resultado

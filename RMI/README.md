@@ -1,12 +1,15 @@
-# Sistemas Distribuidos - Pyro4
 
-1. Construa uma aplicação para localizar um arquivo no servidor. O nome do arquivo deve ser
-informado pelo cliente. O servidor deve informar ao cliente se o arquivo existe ou não.
+Instale o PIP (caso necessario):
 
-2. Construa uma aplicação de Chat Broadcast onde os clientes enviam mensagens para o
-servidor e o mesmo propaga as mensagens para todos os clientes conectados a ele.
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 
-3. Uma agência de viagens possui um sistema online para que seus clientes brasileiros façam
-cotações para saber a viabilidade de viajar para Europa ou Estados Unidos. Esses clientes
-informam o orçamento em reais e a empresa converte esse valor para Dólar ou Euro
-considerando a cotação do dia e o destino do cliente.
+
+python get-pip.py 
+
+
+Dps de baixar as dependencias rode o pyro para iniciar o Pyro4/serviço local
+
+python -m Pyro4.naming
+
+Em seguida rode "Servidor.py" para inicializar o servidor
+
